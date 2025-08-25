@@ -1,0 +1,211 @@
+State,Year,Fiscal_Deficit_Percent
+Andhra Pradesh,2017,4.1
+Andhra Pradesh,2018,1.4
+Andhra Pradesh,2019,4.6
+Andhra Pradesh,2020,4.4
+Andhra Pradesh,2021,2.1
+Andhra Pradesh,2022,3.2
+Andhra Pradesh,2023,3.8
+Arunachal Pradesh,2017,-5.7
+Arunachal Pradesh,2018,-1.5
+Arunachal Pradesh,2019,-0.1
+Arunachal Pradesh,2020,-1.5
+Arunachal Pradesh,2021,-1.0
+Arunachal Pradesh,2022,1.9
+Arunachal Pradesh,2023,2.5
+Assam,2017,2.5
+Assam,2018,2.5
+Assam,2019,2.5
+Assam,2020,3.5
+Assam,2021,3.5
+Assam,2022,3.8
+Assam,2023,3.2
+Bihar,2017,2.8
+Bihar,2018,2.4
+Bihar,2019,2.0
+Bihar,2020,3.0
+Bihar,2021,3.8
+Bihar,2022,8.8
+Bihar,2023,3.0
+Chhattisgarh,2017,3.4
+Chhattisgarh,2018,2.5
+Chhattisgarh,2019,3.5
+Chhattisgarh,2020,4.6
+Chhattisgarh,2021,1.5
+Chhattisgarh,2022,1.8
+Chhattisgarh,2023,2.9
+Goa,2017,2.6
+Goa,2018,3.7
+Goa,2019,2.1
+Goa,2020,4.8
+Goa,2021,3.6
+Goa,2022,3.8
+Goa,2023,4.0
+Gujarat,2017,1.4
+Gujarat,2018,1.8
+Gujarat,2019,1.5
+Gujarat,2020,1.6
+Gujarat,2021,1.7
+Gujarat,2022,1.8
+Gujarat,2023,1.8
+Haryana,2017,4.2
+Haryana,2018,2.7
+Haryana,2019,2.7
+Haryana,2020,3.3
+Haryana,2021,2.9
+Haryana,2022,2.9
+Haryana,2023,3.0
+Himachal Pradesh,2017,4.5
+Himachal Pradesh,2018,4.7
+Himachal Pradesh,2019,4.6
+Himachal Pradesh,2020,6.8
+Himachal Pradesh,2021,3.8
+Himachal Pradesh,2022,5.2
+Himachal Pradesh,2023,4.6
+Jammu & Kashmir,2017,3.9
+Jammu & Kashmir,2018,4.0
+Jammu & Kashmir,2019,5.6
+Jammu & Kashmir,2020,7.9
+Jammu & Kashmir,2021,6.2
+Jammu & Kashmir,2022,5.3
+Jammu & Kashmir,2023,4.6
+Jharkhand,2017,2.1
+Jharkhand,2018,2.3
+Jharkhand,2019,1.2
+Jharkhand,2020,5.2
+Jharkhand,2021,1.0
+Jharkhand,2022,2.4
+Jharkhand,2023,2.8
+Karnataka,2017,2.8
+Karnataka,2018,2.9
+Karnataka,2019,2.6
+Karnataka,2020,2.7
+Karnataka,2021,2.8
+Karnataka,2022,2.8
+Karnataka,2023,2.6
+Kerala,2017,3.2
+Kerala,2018,3.4
+Kerala,2019,3.8
+Kerala,2020,4.8
+Kerala,2021,4.1
+Kerala,2022,3.6
+Kerala,2023,3.9
+Madhya Pradesh,2017,5.3
+Madhya Pradesh,2018,3.3
+Madhya Pradesh,2019,4.0
+Madhya Pradesh,2020,4.3
+Madhya Pradesh,2021,2.3
+Madhya Pradesh,2022,4.0
+Madhya Pradesh,2023,4.0
+Maharashtra,2017,1.6
+Maharashtra,2018,1.7
+Maharashtra,2019,3.1
+Maharashtra,2020,2.5
+Maharashtra,2021,1.4
+Maharashtra,2022,2.5
+Maharashtra,2023,2.5
+Manipur,2017,0.2
+Manipur,2018,-1.2
+Manipur,2019,1.1
+Manipur,2020,1.2
+Manipur,2021,4.2
+Manipur,2022,8.6
+Manipur,2023,5.8
+Meghalaya,2017,2.1
+Meghalaya,2018,0.8
+Meghalaya,2019,2.1
+Meghalaya,2020,3.0
+Meghalaya,2021,3.6
+Meghalaya,2022,4.5
+Meghalaya,2023,4.5
+Mizoram,2017,3.5
+Mizoram,2018,4.7
+Mizoram,2019,4.1
+Mizoram,2020,3.8
+Mizoram,2021,5.0
+Mizoram,2022,5.1
+Mizoram,2023,3.5
+Nagaland,2017,4.5
+Nagaland,2018,2.6
+Nagaland,2019,4.5
+Nagaland,2020,4.5
+Nagaland,2021,5.1
+Nagaland,2022,8.0
+Nagaland,2023,3.8
+Odisha,2017,2.1
+Odisha,2018,2.3
+Odisha,2019,1.7
+Odisha,2020,1.8
+Odisha,2021,1.5
+Odisha,2022,2.2
+Odisha,2023,3.0
+Puducherry,2017,1.9
+Puducherry,2018,1.1
+Puducherry,2019,-0.3
+Puducherry,2020,1.9
+Puducherry,2021,1.7
+Puducherry,2022,1.8
+Puducherry,2023,2.0
+Punjab,2017,7.9
+Punjab,2018,3.4
+Punjab,2019,4.6
+Punjab,2020,4.6
+Punjab,2021,4.3
+Punjab,2022,4.6
+Punjab,2023,5.0
+Rajasthan,2017,2.7
+Rajasthan,2018,3.2
+Rajasthan,2019,3.8
+Rajasthan,2020,5.2
+Rajasthan,2021,3.9
+Rajasthan,2022,4.0
+Rajasthan,2023,4.0
+Sikkim,2017,3.9
+Sikkim,2018,2.8
+Sikkim,2019,0.9
+Sikkim,2020,2.7
+Sikkim,2021,-0.1
+Sikkim,2022,1.9
+Sikkim,2023,3.0
+Tamil Nadu,2017,3.6
+Tamil Nadu,2018,2.8
+Tamil Nadu,2019,3.3
+Tamil Nadu,2020,4.5
+Tamil Nadu,2021,3.0
+Tamil Nadu,2022,3.0
+Tamil Nadu,2023,3.3
+Telangana,2017,3.5
+Telangana,2018,3.3
+Telangana,2019,3.8
+Telangana,2020,2.7
+Telangana,2021,2.8
+Telangana,2022,2.7
+Telangana,2023,3.5
+Tripura,2017,2.2
+Tripura,2018,1.5
+Tripura,2019,2.4
+Tripura,2020,4.8
+Tripura,2021,4.0
+Tripura,2022,2.9
+Tripura,2023,3.8
+Uttar Pradesh,2017,2.6
+Uttar Pradesh,2018,2.6
+Uttar Pradesh,2019,2.4
+Uttar Pradesh,2020,2.9
+Uttar Pradesh,2021,2.0
+Uttar Pradesh,2022,3.5
+Uttar Pradesh,2023,3.5
+Uttarakhand,2017,2.3
+Uttarakhand,2018,2.2
+Uttarakhand,2019,2.3
+Uttarakhand,2020,3.0
+Uttarakhand,2021,2.0
+Uttarakhand,2022,2.3
+Uttarakhand,2023,2.5
+West Bengal,2017,2.5
+West Bengal,2018,2.6
+West Bengal,2019,3.0
+West Bengal,2020,3.5
+West Bengal,2021,2.8
+West Bengal,2022,3.4
+West Bengal,2023,3.3

@@ -1,0 +1,268 @@
+State,Year,GSDP
+Andaman & Nicobar Islands,2011,3921.0
+Andaman & Nicobar Islands,2017,7162.0
+Andaman & Nicobar Islands,2018,8023.0
+Andaman & Nicobar Islands,2019,8767.0
+Andaman & Nicobar Islands,2020,8249.0
+Andaman & Nicobar Islands,2021,9942.0
+Andaman & Nicobar Islands,2022,10749.0
+Andaman & Nicobar Islands,2023,11737.0
+Andhra Pradesh,2011,379402.0
+Andhra Pradesh,2017,780317.0
+Andhra Pradesh,2018,877531.0
+Andhra Pradesh,2019,972782.0
+Andhra Pradesh,2020,988349.0
+Andhra Pradesh,2021,1200358.0
+Andhra Pradesh,2022,1317728.0
+Andhra Pradesh,2023,1449501.0
+Arunachal Pradesh,2011,11063.0
+Arunachal Pradesh,2017,24969.0
+Arunachal Pradesh,2018,27272.0
+Arunachal Pradesh,2019,29737.0
+Arunachal Pradesh,2020,30583.0
+Arunachal Pradesh,2021,33021.0
+Arunachal Pradesh,2022,37819.0
+Arunachal Pradesh,2023,43261.0
+Assam,2011,143175.0
+Assam,2017,285138.0
+Assam,2018,321114.0
+Assam,2019,351338.0
+Assam,2020,373991.0
+Assam,2021,438205.0
+Assam,2022,511595.0
+Assam,2023,569726.0
+Bihar,2011,247144.0
+Bihar,2017,487780.0
+Bihar,2018,562710.0
+Bihar,2019,611804.0
+Bihar,2020,618630.0
+Bihar,2021,675448.0
+Bihar,2022,751396.0
+Bihar,2023,858928.0
+Chandigarh,2011,21784.0
+Chandigarh,2017,36493.0
+Chandigarh,2018,40006.0
+Chandigarh,2019,42146.0
+Chandigarh,2020,40790.0
+Chandigarh,2021,45635.0
+Chandigarh,2022,50034.0
+Chandigarh,2023,54685.0
+Chhattisgarh,2011,158074.0
+Chhattisgarh,2017,268181.0
+Chhattisgarh,2018,304063.0
+Chhattisgarh,2019,338414.0
+Chhattisgarh,2020,354773.0
+Chhattisgarh,2021,422357.0
+Chhattisgarh,2022,457608.0
+Chhattisgarh,2023,486081.0
+Delhi,2011,391253.0
+Delhi,2017,694222.0
+Delhi,2018,798310.0
+Delhi,2019,856700.0
+Delhi,2020,834744.0
+Delhi,2021,903650.0
+Delhi,2022,1014000.0
+Delhi,2023,1107746.0
+Goa,2011,42806.0
+Goa,2017,69584.0
+Goa,2018,73170.0
+Goa,2019,77506.0
+Goa,2020,73939.0
+Goa,2021,82604.0
+Goa,2022,91412.0
+Goa,2023,99840.0
+Gujarat,2011,615626.0
+Gujarat,2017,1386161.0
+Gujarat,2018,1502899.0
+Gujarat,2019,1648478.0
+Gujarat,2020,1704978.0
+Gujarat,2021,2048345.0
+Gujarat,2022,2260958.0
+Gujarat,2023,2502878.0
+Haryana,2011,297539.0
+Haryana,2017,632514.0
+Haryana,2018,693379.0
+Haryana,2019,735715.0
+Haryana,2020,764871.0
+Haryana,2021,903341.0
+Haryana,2022,994154.0
+Haryana,2023,1127270.0
+Himachal Pradesh,2011,68565.0
+Himachal Pradesh,2017,138518.0
+Himachal Pradesh,2018,153845.0
+Himachal Pradesh,2019,165472.0
+Himachal Pradesh,2020,162816.0
+Himachal Pradesh,2021,176269.0
+Himachal Pradesh,2022,195404.0
+Himachal Pradesh,2023,214890.0
+Jammu & Kashmir,2011,78202.0
+Jammu & Kashmir,2017,145296.0
+Jammu & Kashmir,2018,157582.0
+Jammu & Kashmir,2019,176244.0
+Jammu & Kashmir,2020,177073.0
+Jammu & Kashmir,2021,202748.0
+Jammu & Kashmir,2022,227970.0
+Jammu & Kashmir,2023,243456.0
+Jharkhand,2011,150918.0
+Jharkhand,2017,297294.0
+Jharkhand,2018,319525.0
+Jharkhand,2019,329125.0
+Jharkhand,2020,329622.0
+Jharkhand,2021,358863.0
+Jharkhand,2022,390131.0
+Jharkhand,2023,423213.0
+Karnataka,2011,603778.0
+Karnataka,2017,1397456.0
+Karnataka,2018,1544399.0
+Karnataka,2019,1665379.0
+Karnataka,2020,1703934.0
+Karnataka,2021,2049579.0
+Karnataka,2022,2241368.0
+Karnataka,2023,2504519.0
+Kerala,2011,364048.0
+Kerala,2017,689845.0
+Kerala,2018,788144.0
+Kerala,2019,800943.0
+Kerala,2020,800816.0
+Kerala,2021,988908.0
+Kerala,2022,1099996.0
+Kerala,2023,1133830.0
+Ladakh,2021,12987.0
+Ladakh,2022,14036.0
+Ladakh,2023,15316.0
+Madhya Pradesh,2011,315561.0
+Madhya Pradesh,2017,737122.0
+Madhya Pradesh,2018,826137.0
+Madhya Pradesh,2019,917553.0
+Madhya Pradesh,2020,976281.0
+Madhya Pradesh,2021,1162118.0
+Madhya Pradesh,2022,1322821.0
+Madhya Pradesh,2023,1424528.0
+Maharashtra,2011,1272370.0
+Maharashtra,2017,2411439.0
+Maharashtra,2018,2660332.0
+Maharashtra,2019,2818137.0
+Maharashtra,2020,2747015.0
+Maharashtra,2021,3108022.0
+Maharashtra,2022,3428294.0
+Maharashtra,2023,3879077.0
+Manipur,2011,12915.0
+Manipur,2017,27106.0
+Manipur,2018,29667.0
+Manipur,2019,31862.0
+Manipur,2020,31617.0
+Manipur,2021,36593.0
+Manipur,2022,39545.0
+Manipur,2023,45156.0
+Meghalaya,2011,19918.0
+Meghalaya,2017,30959.0
+Meghalaya,2018,33485.0
+Meghalaya,2019,35082.0
+Meghalaya,2020,34759.0
+Meghalaya,2021,38784.0
+Meghalaya,2022,42697.0
+Meghalaya,2023,46796.0
+Mizoram,2011,11559.0
+Mizoram,2017,22287.0
+Mizoram,2018,24474.0
+Mizoram,2019,27822.0
+Mizoram,2020,27976.0
+Mizoram,2021,31521.0
+Mizoram,2022,35026.0
+Mizoram,2023,38983.0
+Nagaland,2011,13847.0
+Nagaland,2017,25856.0
+Nagaland,2018,28529.0
+Nagaland,2019,30705.0
+Nagaland,2020,31068.0
+Nagaland,2021,34701.0
+Nagaland,2022,37867.0
+Nagaland,2023,41273.0
+Odisha,2011,237589.0
+Odisha,2017,427352.0
+Odisha,2018,490443.0
+Odisha,2019,521275.0
+Odisha,2020,533826.0
+Odisha,2021,662670.0
+Odisha,2022,765856.0
+Odisha,2023,864880.0
+Puducherry,2011,18348.0
+Puducherry,2017,31529.0
+Puducherry,2018,34843.0
+Puducherry,2019,38007.0
+Puducherry,2020,37250.0
+Puducherry,2021,41185.0
+Puducherry,2022,44795.0
+Puducherry,2023,49630.0
+Punjab,2011,266628.0
+Punjab,2017,473814.0
+Punjab,2018,521835.0
+Punjab,2019,541751.0
+Punjab,2020,546499.0
+Punjab,2021,614220.0
+Punjab,2022,679531.0
+Punjab,2023,736423.0
+Rajasthan,2011,436222.0
+Rajasthan,2017,840481.0
+Rajasthan,2018,929486.0
+Rajasthan,2019,1020989.0
+Rajasthan,2020,1018879.0
+Rajasthan,2021,1218193.0
+Rajasthan,2022,1413620.0
+Rajasthan,2023,1561496.0
+Sikkim,2011,11165.0
+Sikkim,2017,25142.0
+Sikkim,2018,28382.0
+Sikkim,2019,31713.0
+Sikkim,2020,32496.0
+Sikkim,2021,37455.0
+Sikkim,2022,42393.0
+Sikkim,2023,47404.0
+Tamil Nadu,2011,751489.0
+Tamil Nadu,2017,1466059.0
+Tamil Nadu,2018,1704013.0
+Tamil Nadu,2019,1858831.0
+Tamil Nadu,2020,1902640.0
+Tamil Nadu,2021,2176115.0
+Tamil Nadu,2022,2364514.0
+Tamil Nadu,2023,2579555.0
+Telangana,2011,359434.0
+Telangana,2017,761283.0
+Telangana,2018,865688.0
+Telangana,2019,978067.0
+Telangana,2020,978634.0
+Telangana,2021,1148460.0
+Telangana,2022,1303381.0
+Telangana,2023,1449708.0
+Tripura,2011,24538.0
+Tripura,2017,48134.0
+Tripura,2018,53923.0
+Tripura,2019,59739.0
+Tripura,2020,60633.0
+Tripura,2021,64821.0
+Tripura,2022,71689.0
+Tripura,2023,78515.0
+Uttar Pradesh,2011,724824.0
+Uttar Pradesh,2017,1404731.0
+Uttar Pradesh,2018,1584801.0
+Uttar Pradesh,2019,1687818.0
+Uttar Pradesh,2020,1645317.0
+Uttar Pradesh,2021,1974532.0
+Uttar Pradesh,2022,2257575.0
+Uttar Pradesh,2023,2548227.0
+Uttarakhand,2011,105829.0
+Uttarakhand,2017,213275.0
+Uttarakhand,2018,233182.0
+Uttarakhand,2019,245895.0
+Uttarakhand,2020,243334.0
+Uttarakhand,2021,272159.0
+Uttarakhand,2022,302621.0
+Uttarakhand,2023,346252.0
+West Bengal,2011,465224.0
+West Bengal,2017,959793.0
+West Bengal,2018,1090950.0
+West Bengal,2019,1252020.0
+West Bengal,2020,1212633.0
+West Bengal,2021,1510725.0
+West Bengal,2022,1701482.0
+West Bengal,2023,1879563.0
