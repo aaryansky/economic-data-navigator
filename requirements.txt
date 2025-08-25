@@ -196,7 +196,7 @@ threadpoolctl==3.6.0
 timm==1.0.19
 tokenizers==0.21.4
 toml==0.10.2
-torch==2.8.0+cpu
+torch
 torchvision==0.23.0+cpu
 tornado==6.5.2
 tqdm==4.67.1
