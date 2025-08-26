@@ -13,6 +13,10 @@ from langchain.agents import AgentExecutor, create_tool_calling_agent
 from langchain_core.messages import AIMessage, HumanMessage
 from langchain.tools import Tool
 
+__import__('pysqlite3')
+import sys
+sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+
 # --- PAGE CONFIGURATION ---
 st.set_page_config(
     page_title="India Economic Data Navigator",
