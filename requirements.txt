@@ -8,3 +8,4 @@ torch
 sentence-transformers
 chromadb
 SQLAlchemy
+pysqlite3-binary
