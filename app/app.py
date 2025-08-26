@@ -2,7 +2,7 @@ import os
 import streamlit as st
 import pandas as pd
 from prophet import Prophet
-from langchain_community.vectorstores import Chroma
+from langchain_community.vectorstores import FAISS
 from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_groq import ChatGroq
 from langchain.prompts import ChatPromptTemplate
@@ -30,7 +30,12 @@ def load_embedding_model():
 @st.cache_resource
 def load_pdf_retriever(_embeddings):
     persist_directory = 'vector_store'
-    vectordb = Chroma(persist_directory=persist_directory, embedding_function=_embeddings)
+    # Load the FAISS vector store from local disk
+    vectordb = FAISS.load_local(
+        folder_path=persist_directory,
+        embeddings=_embeddings,
+        allow_dangerous_deserialization=True  # Required for loading local FAISS indexes
+    )
     return vectordb.as_retriever(search_kwargs={"k": 5})
 
 @st.cache_resource

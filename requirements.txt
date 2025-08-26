@@ -6,6 +6,6 @@ langchain-groq
 langchain
 torch
 sentence-transformers
-chromadb==0.4.22
 SQLAlchemy
 numpy==1.26.4
+faiss-cpu
