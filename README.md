@@ -10,7 +10,7 @@ The application is powered by a central LangChain agent that intelligently selec
 
 ### 1. AI-Powered Document Q&A (RAG System)
 * **Functionality**: Ask questions in plain English about official documents like RBI Annual Reports, Union Budget Speeches, and Economic Surveys.
-* **How it Works**: This feature uses a Retrieval-Augmented Generation (RAG) pipeline. The `app.py` script creates a `pdf_search_tool` that connects to a Chroma vector store. This knowledge base is built by the `data_ingestion_and_cleaning.ipynb` notebook, which processes and embeds the raw PDF files.
+* **How it Works**: This feature uses a Retrieval-Augmented Generation (RAG) pipeline. The `app.py` script creates a `pdf_search_tool` that connects to a FAISS vector store. This knowledge base is built by the `data_ingestion_and_cleaning.ipynb` notebook, which processes and embeds the raw PDF files.
 
 ### 2. Natural Language Database Querying (SQL Agent)
 * **Functionality**: Get specific data points by asking questions about structured data, such as G-Sec auction results or state-wise economic indicators.
@@ -54,7 +54,7 @@ The project is divided into a data processing backend (Jupyter Notebooks) and a 
 -   **AI & LLM Orchestration:** LangChain, Groq (Llama 3)
 -   **Data Processing:** Pandas, NumPy, SQLAlchemy
 -   **Time-Series Forecasting:** Prophet (from Meta)
--   **Vector DB & Embeddings:** ChromaDB, Hugging Face Transformers
+-   **Vector DB & Embeddings:** FAISS, Hugging Face Transformers
 -   **PDF Extraction:** PyMuPDF (`fitz`)
 
 ---
