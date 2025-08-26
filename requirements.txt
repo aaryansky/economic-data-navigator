@@ -6,6 +6,5 @@ langchain-groq
 langchain
 torch
 sentence-transformers
-chromadb
+chromadb==0.4.22
 SQLAlchemy
-pysqlite3-binary
