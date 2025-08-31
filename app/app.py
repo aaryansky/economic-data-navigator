@@ -13,7 +13,7 @@ from langchain.agents import AgentExecutor, create_tool_calling_agent
 from langchain_core.messages import AIMessage, HumanMessage
 from langchain.tools import Tool
 from langchain_core.prompts import MessagesPlaceholder
-from groq.error import BadRequestError  # NEW: Import the specific error
+from groq import BadRequestError  # NEW: Import the specific error
 
 # --- PAGE CONFIGURATION ---
 st.set_page_config(
