@@ -37,7 +37,7 @@ def load_pdf_retriever(_embeddings):
         embeddings=_embeddings,
         allow_dangerous_deserialization=True
     )
-    return vectordb.as_retriever(search_kwargs={"k": 1})
+    return vectordb.as_retriever(search_kwargs={"k": 5})
 
 @st.cache_resource
 def get_sql_database():
