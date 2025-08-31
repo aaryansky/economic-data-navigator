@@ -12,6 +12,7 @@ from langchain_community.agent_toolkits import create_sql_agent
 from langchain.agents import AgentExecutor, create_tool_calling_agent
 from langchain_core.messages import AIMessage, HumanMessage
 from langchain.tools import Tool
+from langchain_core.prompts import MessagesPlaceholder # NEW: Import for chat history
 
 # --- PAGE CONFIGURATION ---
 st.set_page_config(
@@ -30,11 +31,10 @@ def load_embedding_model():
 @st.cache_resource
 def load_pdf_retriever(_embeddings):
     persist_directory = 'vector_store'
-    # Load the FAISS vector store from local disk
     vectordb = FAISS.load_local(
         folder_path=persist_directory,
         embeddings=_embeddings,
-        allow_dangerous_deserialization=True  # Required for loading local FAISS indexes
+        allow_dangerous_deserialization=True
     )
     return vectordb.as_retriever(search_kwargs={"k": 5})
 
@@ -88,7 +88,6 @@ def get_gdp_forecast(state_name: str, years_to_forecast: int = 3):
     except Exception as e:
         return f"An error occurred during forecasting: {e}"
 
-
 # --- STREAMLIT APP LAYOUT ---
 st.title("🇮🇳 India Economic Data Navigator")
 st.markdown("I can answer questions, search documents, and **forecast GSDP**.")
@@ -97,16 +96,13 @@ if "chat_history" not in st.session_state:
     st.session_state.chat_history = [AIMessage(content="Hello! I am an AI agent with access to multiple data sources and a forecasting model. How can I help you?")]
 
 # --- API KEY & MAIN LOGIC ---
-# Try to get the API key from Streamlit secrets
 groq_api_key = st.secrets.get("GROQ_API_KEY")
 
 if not groq_api_key:
     st.info("Please add your Groq API Key to the Streamlit secrets to run this app.")
     st.stop()
 
-# If the key exists, proceed with the main app logic
 llm = ChatGroq(model="llama3-70b-8192", groq_api_key=groq_api_key, temperature=0)
-
 embeddings = load_embedding_model()
 pdf_retriever = load_pdf_retriever(embeddings)
 db = get_sql_database()
@@ -120,13 +116,14 @@ forecasting_tool = Tool(
     func=get_gdp_forecast,
     description="Use this tool when the user asks for a forecast or prediction of future GSDP for a specific Indian state. The input should be the name of the state."
 )
-
 tools = [pdf_search_tool, sql_tool, forecasting_tool]
 
 # --- CREATE THE AGENT ---
+# MODIFIED: Added a placeholder for chat history
 agent_prompt = ChatPromptTemplate.from_messages(
     [
         ("system", "You are an expert financial assistant. You have access to tools for answering questions and making forecasts. Use the tools to find the information and then answer the question. For forecasts, mention that they are based on historical data and not financial advice."),
+        MessagesPlaceholder(variable_name="chat_history"),
         ("human", "{input}"),
         ("placeholder", "{agent_scratchpad}"),
     ]
@@ -152,7 +149,11 @@ if user_query:
 
     with st.chat_message("AI"):
         with st.spinner("Agent is thinking..."):
-            response = agent_executor.invoke({"input": user_query})
+            # MODIFIED: Pass the chat history to the agent
+            response = agent_executor.invoke({
+                "input": user_query,
+                "chat_history": st.session_state.chat_history
+            })
             answer = response.get("output", "I encountered an error.")
             st.session_state.chat_history.append(AIMessage(content=answer))
             st.rerun()
