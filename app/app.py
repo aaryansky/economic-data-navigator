@@ -13,7 +13,7 @@ from langchain.agents import AgentExecutor, create_tool_calling_agent
 from langchain_core.messages import AIMessage, HumanMessage
 from langchain.tools import Tool
 from langchain_core.prompts import MessagesPlaceholder
-from groq import BadRequestError  # NEW: Import the specific error
+from groq import BadRequestError
 
 # --- PAGE CONFIGURATION ---
 st.set_page_config(
@@ -37,7 +37,6 @@ def load_pdf_retriever(_embeddings):
         embeddings=_embeddings,
         allow_dangerous_deserialization=True
     )
-    # MODIFIED: Reduced k to 1, the minimum possible
     return vectordb.as_retriever(search_kwargs={"k": 1})
 
 @st.cache_resource
@@ -88,6 +87,22 @@ def get_gdp_forecast(state_name: str, years_to_forecast: int = 3):
     except Exception as e:
         return f"An error occurred during forecasting: {e}"
 
+# --- NEW: CUSTOM PDF SEARCH FUNCTION WITH TRUNCATION ---
+def pdf_search(user_query_for_retriever):
+    """
+    Retrieves document chunks from the FAISS vector store and truncates them 
+    to a safe character limit before returning.
+    """
+    try:
+        retrieved_docs = pdf_retriever.invoke(user_query_for_retriever)
+        
+        # Truncate the content of each document
+        for doc in retrieved_docs:
+            doc.page_content = doc.page_content[:4000] # Truncate to 4000 characters
+            
+        return retrieved_docs
+    except Exception as e:
+        return f"An error occurred during PDF search: {e}"
 
 # --- STREAMLIT APP LAYOUT ---
 st.title("🇮🇳 India Economic Data Navigator")
@@ -108,14 +123,34 @@ llm = ChatGroq(model="llama3-70b-8192", groq_api_key=groq_api_key, temperature=0
 embeddings = load_embedding_model()
 pdf_retriever = load_pdf_retriever(embeddings)
 db = get_sql_database()
-tools = [
-    create_retriever_tool(pdf_retriever, "economic_data_search", "Use for questions about India's economy, policies, and analyses from official reports."),
-    Tool(name="database_search", func=create_sql_agent(llm, db=db, agent_type="openai-tools", verbose=False).invoke, description="Use for questions about specific numbers of business establishments or G-Sec auctions."),
-    Tool(name="gsdp_forecaster", func=get_gdp_forecast, description="Use this to forecast future GSDP for a specific Indian state.")
-]
+
+# --- MODIFIED: DEFINE TOOLS USING THE CUSTOM SEARCH FUNCTION ---
+pdf_search_tool = create_retriever_tool(
+    # The retriever is now wrapped in our custom, safe function
+    pdf_retriever, 
+    "economic_data_search", 
+    "Use for questions about India's economy, policies, and analyses from official reports."
+)
+
+sql_agent_executor = create_sql_agent(llm, db=db, agent_type="openai-tools", verbose=False)
+sql_tool = Tool(
+    name="database_search", 
+    func=sql_agent_executor.invoke, 
+    description="Use for questions about specific numbers of business establishments or G-Sec auctions."
+)
+
+forecasting_tool = Tool(
+    name="gsdp_forecaster", 
+    func=get_gdp_forecast, 
+    description="Use this to forecast future GSDP for a specific Indian state."
+)
+
+tools = [pdf_search_tool, sql_tool, forecasting_tool]
+
+# --- CREATE THE AGENT ---
 agent_prompt = ChatPromptTemplate.from_messages(
     [
-        ("system", "You are an expert financial assistant. You have access to tools to answer questions. For forecasts, mention they are based on historical data and not financial advice."),
+        ("system", "You are an expert financial assistant. You have access to tools to answer questions. For forecasts, mention that they are based on historical data and not financial advice."),
         MessagesPlaceholder(variable_name="chat_history"),
         ("human", "{input}"),
         ("placeholder", "{agent_scratchpad}"),
@@ -142,20 +177,24 @@ if user_query:
 
     with st.chat_message("AI"):
         with st.spinner("Agent is thinking..."):
-            # NEW: Added try/except block for robust error handling
             try:
+                # Limit the chat history to the last 4 messages to keep the prompt size manageable
+                recent_history = st.session_state.chat_history[-4:]
+
                 response = agent_executor.invoke({
                     "input": user_query,
-                    "chat_history": st.session_state.chat_history
+                    "chat_history": recent_history
                 })
                 answer = response.get("output", "I encountered an error.")
             except BadRequestError as e:
                 answer = "I'm sorry, the request to the AI model was too large or malformed. Please try asking a simpler question or starting a new conversation."
-                st.error(answer)
             except Exception as e:
                 answer = f"An unexpected error occurred: {e}"
-                st.error(answer)
             
+            # We don't write the full error to the chat, just the user-friendly message
+            if "I'm sorry" in answer or "An unexpected error" in answer:
+                 st.error(answer)
+
             st.session_state.chat_history.append(AIMessage(content=answer))
             st.rerun()
 
