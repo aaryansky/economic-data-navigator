@@ -12,7 +12,7 @@ from langchain_community.agent_toolkits import create_sql_agent
 from langchain.agents import AgentExecutor, create_tool_calling_agent
 from langchain_core.messages import AIMessage, HumanMessage
 from langchain.tools import Tool
-from langchain_core.prompts import MessagesPlaceholder # NEW: Import for chat history
+from langchain_core.prompts import MessagesPlaceholder
 
 # --- PAGE CONFIGURATION ---
 st.set_page_config(
@@ -31,10 +31,11 @@ def load_embedding_model():
 @st.cache_resource
 def load_pdf_retriever(_embeddings):
     persist_directory = 'vector_store'
+    # Load the FAISS vector store from local disk
     vectordb = FAISS.load_local(
         folder_path=persist_directory,
         embeddings=_embeddings,
-        allow_dangerous_deserialization=True
+        allow_dangerous_deserialization=True  # Required for loading local FAISS indexes
     )
     return vectordb.as_retriever(search_kwargs={"k": 3})
 
@@ -88,6 +89,7 @@ def get_gdp_forecast(state_name: str, years_to_forecast: int = 3):
     except Exception as e:
         return f"An error occurred during forecasting: {e}"
 
+
 # --- STREAMLIT APP LAYOUT ---
 st.title("🇮🇳 India Economic Data Navigator")
 st.markdown("I can answer questions, search documents, and **forecast GSDP**.")
@@ -119,7 +121,6 @@ forecasting_tool = Tool(
 tools = [pdf_search_tool, sql_tool, forecasting_tool]
 
 # --- CREATE THE AGENT ---
-# MODIFIED: Added a placeholder for chat history
 agent_prompt = ChatPromptTemplate.from_messages(
     [
         ("system", "You are an expert financial assistant. You have access to tools for answering questions and making forecasts. Use the tools to find the information and then answer the question. For forecasts, mention that they are based on historical data and not financial advice."),
@@ -149,7 +150,7 @@ if user_query:
 
     with st.chat_message("AI"):
         with st.spinner("Agent is thinking..."):
-            # MODIFIED: Pass the chat history to the agent
+            # Pass the chat history to the agent for conversational memory
             response = agent_executor.invoke({
                 "input": user_query,
                 "chat_history": st.session_state.chat_history
@@ -157,3 +158,4 @@ if user_query:
             answer = response.get("output", "I encountered an error.")
             st.session_state.chat_history.append(AIMessage(content=answer))
             st.rerun()
+
