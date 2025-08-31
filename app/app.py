@@ -37,7 +37,7 @@ def load_pdf_retriever(_embeddings):
         embeddings=_embeddings,
         allow_dangerous_deserialization=True  # Required for loading local FAISS indexes
     )
-    return vectordb.as_retriever(search_kwargs={"k": 3})
+    return vectordb.as_retriever(search_kwargs={"k": 2})
 
 @st.cache_resource
 def get_sql_database():
