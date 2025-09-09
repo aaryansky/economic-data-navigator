@@ -186,9 +186,9 @@ if user_query:
                     "chat_history": recent_history
                 })
                 answer = response.get("output", "I encountered an error.")
-            except BadRequestError as e:
+             except BadRequestError as e:
                 answer = "I'm sorry, the request to the AI model was too large or malformed. Please try asking a simpler question or starting a new conversation."
-            except Exception as e:
+             except Exception as e:
                 answer = f"An unexpected error occurred: {e}"
             
             # We don't write the full error to the chat, just the user-friendly message
