@@ -191,10 +191,10 @@ if user_query:
              except Exception as e:
                 answer = f"An unexpected error occurred: {e}"
             
-            # We don't write the full error to the chat, just the user-friendly message
-            if "I'm sorry" in answer or "An unexpected error" in answer:
+             # We don't write the full error to the chat, just the user-friendly message
+             if "I'm sorry" in answer or "An unexpected error" in answer:
                  st.error(answer)
 
-            st.session_state.chat_history.append(AIMessage(content=answer))
-            st.rerun()
+             st.session_state.chat_history.append(AIMessage(content=answer))
+             st.rerun()
 
