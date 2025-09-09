@@ -4,17 +4,14 @@ import pandas as pd
 from prophet import Prophet
 from langchain_community.vectorstores import FAISS
 from langchain_community.embeddings import HuggingFaceEmbeddings
-# --- CHANGE 1: Import ChatNVIDIA instead of ChatGroq ---
 from langchain_nvidia_ai_endpoints import ChatNVIDIA
 from langchain.prompts import ChatPromptTemplate
 from langchain_community.utilities import SQLDatabase
-# --- REMOVED create_retriever_tool as we are making a custom tool ---
 from langchain_community.agent_toolkits import create_sql_agent
 from langchain.agents import AgentExecutor, create_tool_calling_agent
 from langchain_core.messages import AIMessage, HumanMessage
 from langchain.tools import Tool
 from langchain_core.prompts import MessagesPlaceholder
-# --- REMOVED groq.BadRequestError as it's no longer needed ---
 
 # --- PAGE CONFIGURATION ---
 st.set_page_config(
@@ -32,7 +29,6 @@ def load_embedding_model():
 
 @st.cache_resource
 def load_pdf_retriever(_embeddings):
-    # Ensure the 'vector_store' directory exists
     if not os.path.exists('vector_store'):
         st.error("The 'vector_store' directory was not found. Please make sure it exists and contains your FAISS index.")
         st.stop()
@@ -47,7 +43,6 @@ def load_pdf_retriever(_embeddings):
 @st.cache_resource
 def get_sql_database():
     db_path = 'data/processed/esd_indicators.sqlite'
-    # Ensure the database file exists
     if not os.path.exists(db_path):
         st.error(f"The database file was not found at '{db_path}'. Please ensure the path is correct.")
         st.stop()
@@ -96,7 +91,6 @@ def get_gdp_forecast(state_name: str, years_to_forecast: int = 3):
     except Exception as e:
         return f"An error occurred during forecasting: {e}"
 
-# --- FIX: ROBUST PDF SEARCH FUNCTION TO PREVENT ERRORS ---
 def pdf_search(user_query: str) -> str:
     """
     Searches the vector store, combines the content of retrieved documents into a
@@ -104,10 +98,8 @@ def pdf_search(user_query: str) -> str:
     """
     try:
         retrieved_docs = pdf_retriever.invoke(user_query)
-        # Combine the content of all retrieved documents
         combined_content = "\n---\n".join([doc.page_content for doc in retrieved_docs])
-        # Truncate the combined content to a safe limit
-        return combined_content[:6000] # Increased limit slightly for potentially better context
+        return combined_content[:6000]
     except Exception as e:
         return f"An error occurred during PDF search: {e}"
 
@@ -118,33 +110,92 @@ st.markdown("I can answer questions, search documents, and **forecast GSDP**.")
 if "chat_history" not in st.session_state:
     st.session_state.chat_history = [AIMessage(content="Hello! How can I help you?")]
 
-# --- CHANGE 2: USE NVIDIA API KEY ---
-nvidia_api_key = st.secrets.get("NVIDIA_API_KEY")
+# --- API KEY HANDLING ---
+nvidia_api_key = st.secrets.get("NVIDIA_API_KEY") or os.getenv("NVIDIA_API_KEY")
 
 if not nvidia_api_key:
-    st.info("Please add your NVIDIA API Key to the Streamlit secrets to run this app.")
+    st.info("Please add your NVIDIA API Key to the Streamlit secrets or environment variables to run this app.")
+    st.info("You can get your API key from: https://build.nvidia.com/")
     st.stop()
 
-# Initialize components
-# --- CHANGE 3: INITIALIZE ChatNVIDIA LLM ---
-llm = ChatNVIDIA(model="meta/llama3-70b-instruct", nvidia_api_key=nvidia_api_key, temperature=0, max_tokens=1024)
-embeddings = load_embedding_model()
-pdf_retriever = load_pdf_retriever(embeddings)
-db = get_sql_database()
+# Set the API key as environment variable
+os.environ["NVIDIA_API_KEY"] = nvidia_api_key
 
-# --- FIX: DEFINE TOOLS USING THE ROBUST CUSTOM SEARCH FUNCTION ---
+# --- INITIALIZE NVIDIA LLM WITH CORRECT MODEL NAME ---
+try:
+    st.info("Initializing NVIDIA LLM...")
+    # Use the correct model name based on what you saw on the website
+    llm = ChatNVIDIA(
+        model="meta/llama-3.1-70b-instruct",  # Updated to match the website format
+        temperature=0,
+        max_tokens=1024
+    )
+    
+    # Test the model with a simple call
+    test_response = llm.invoke("Hello")
+    st.success("✅ Successfully initialized meta/llama-3.1-70b-instruct")
+    
+except Exception as e:
+    st.error(f"❌ Error initializing NVIDIA LLM: {e}")
+    st.info("Trying alternative model names...")
+    
+    # Fallback models to try
+    fallback_models = [
+        "meta/llama3-70b-instruct",
+        "meta/llama-3.1-8b-instruct",
+        "mistralai/mixtral-8x7b-instruct-v0.1"
+    ]
+    
+    llm = None
+    for model_name in fallback_models:
+        try:
+            st.info(f"Trying: {model_name}")
+            llm = ChatNVIDIA(
+                model=model_name,
+                temperature=0,
+                max_tokens=1024
+            )
+            test_response = llm.invoke("Hello")
+            st.success(f"✅ Successfully initialized {model_name}")
+            break
+        except Exception as model_error:
+            st.warning(f"❌ Failed: {model_name}")
+            continue
+    
+    if llm is None:
+        st.error("Could not initialize any NVIDIA model. Please check your API key and model access.")
+        st.stop()
+
+# Initialize other components
+try:
+    embeddings = load_embedding_model()
+    pdf_retriever = load_pdf_retriever(embeddings)
+    db = get_sql_database()
+except Exception as e:
+    st.error(f"Error initializing components: {e}")
+    st.stop()
+
+# --- DEFINE TOOLS ---
 pdf_search_tool = Tool(
     name="economic_data_search",
-    func=pdf_search, # Use the robust function
+    func=pdf_search,
     description="Use for questions about India's economy, policies, and analyses from official reports. Input should be the user's question."
 )
 
-sql_agent_executor = create_sql_agent(llm, db=db, agent_type="openai-tools", verbose=False)
-sql_tool = Tool(
-    name="database_search",
-    func=sql_agent_executor.invoke,
-    description="Use for questions about specific numbers of business establishments or G-Sec auctions."
-)
+try:
+    sql_agent_executor = create_sql_agent(llm, db=db, agent_type="openai-tools", verbose=False)
+    sql_tool = Tool(
+        name="database_search",
+        func=sql_agent_executor.invoke,
+        description="Use for questions about specific numbers of business establishments or G-Sec auctions."
+    )
+except Exception as e:
+    st.warning(f"Could not initialize SQL agent: {e}")
+    sql_tool = Tool(
+        name="database_search",
+        func=lambda x: "Database search is currently unavailable.",
+        description="Database search tool (currently unavailable)."
+    )
 
 forecasting_tool = Tool(
     name="gsdp_forecaster",
@@ -163,8 +214,13 @@ agent_prompt = ChatPromptTemplate.from_messages(
         ("placeholder", "{agent_scratchpad}"),
     ]
 )
-agent = create_tool_calling_agent(llm, tools, agent_prompt)
-agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True, handle_parsing_errors=True)
+
+try:
+    agent = create_tool_calling_agent(llm, tools, agent_prompt)
+    agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True, handle_parsing_errors=True)
+except Exception as e:
+    st.error(f"Error creating agent: {e}")
+    st.stop()
 
 # Display chat history
 for message in st.session_state.chat_history:
@@ -193,11 +249,9 @@ if user_query:
                     "chat_history": recent_history
                 })
                 answer = response.get("output", "I encountered an error.")
-            # --- CHANGE 4: GENERAL EXCEPTION HANDLING ---
             except Exception as e:
                 st.error(f"An error occurred: {e}")
                 answer = "I'm sorry, I ran into a problem while trying to answer. Please try again or rephrase your question."
 
         st.write(answer)
         st.session_state.chat_history.append(AIMessage(content=answer))
-        # No st.rerun() needed, Streamlit handles the update
