@@ -2,10 +2,10 @@ streamlit
 pandas
 prophet
 langchain-community
-langchain-groq
 langchain
 torch
 sentence-transformers
 SQLAlchemy
 numpy==1.26.4
 faiss-cpu
+langchain_nvidia_ai_endpoints
