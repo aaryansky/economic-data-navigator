@@ -178,7 +178,7 @@ if user_query:
      with st.chat_message("AI"):
          with st.spinner("Agent is thinking..."):
              try:
-                 Limit the chat history to the last 4 messages to keep the prompt size manageable
+                # Limit the chat history to the last 4 messages to keep the prompt size manageable
                 recent_history = st.session_state.chat_history[-4:]
 
                 response = agent_executor.invoke({
