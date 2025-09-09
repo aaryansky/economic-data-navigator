@@ -169,32 +169,32 @@ for message in st.session_state.chat_history:
             st.write(message.content)
 
 # # Get user input
-# user_query = st.chat_input("Ask your question...")
-# if user_query:
-#     st.session_state.chat_history.append(HumanMessage(content=user_query))
-#     with st.chat_message("Human"):
-#         st.write(user_query)
+user_query = st.chat_input("Ask your question...")
+if user_query:
+     st.session_state.chat_history.append(HumanMessage(content=user_query))
+     with st.chat_message("Human"):
+         st.write(user_query)
 
-#     with st.chat_message("AI"):
-#         with st.spinner("Agent is thinking..."):
-#             try:
-#                 # Limit the chat history to the last 4 messages to keep the prompt size manageable
-#                 recent_history = st.session_state.chat_history[-4:]
+     with st.chat_message("AI"):
+         with st.spinner("Agent is thinking..."):
+             try:
+                 Limit the chat history to the last 4 messages to keep the prompt size manageable
+                recent_history = st.session_state.chat_history[-4:]
 
-#                 response = agent_executor.invoke({
-#                     "input": user_query,
-#                     "chat_history": recent_history
-#                 })
-#                 answer = response.get("output", "I encountered an error.")
-#             except BadRequestError as e:
-#                 answer = "I'm sorry, the request to the AI model was too large or malformed. Please try asking a simpler question or starting a new conversation."
-#             except Exception as e:
-#                 answer = f"An unexpected error occurred: {e}"
+                response = agent_executor.invoke({
+                    "input": user_query,
+                    "chat_history": recent_history
+                })
+                answer = response.get("output", "I encountered an error.")
+            except BadRequestError as e:
+                answer = "I'm sorry, the request to the AI model was too large or malformed. Please try asking a simpler question or starting a new conversation."
+            except Exception as e:
+                answer = f"An unexpected error occurred: {e}"
             
-#             # We don't write the full error to the chat, just the user-friendly message
-#             if "I'm sorry" in answer or "An unexpected error" in answer:
-#                  st.error(answer)
+            # We don't write the full error to the chat, just the user-friendly message
+            if "I'm sorry" in answer or "An unexpected error" in answer:
+                 st.error(answer)
 
-#             st.session_state.chat_history.append(AIMessage(content=answer))
-#             st.rerun()
+            st.session_state.chat_history.append(AIMessage(content=answer))
+            st.rerun()
 
